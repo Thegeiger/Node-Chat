@@ -1,0 +1,19 @@
+<title>My_Game</title>
+<link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect('http://localhost:5000');
+  socket.on('response', function (data) {
+      $("#msg").append("<p>" + data + "</p>");
+  });
+  function onSubmit () {
+    var msg = $(".input-chat").val();
+    if (msg == "" || msg == null) {
+      return false;
+    }
+    $(".input-chat").val("");
+    socket.emit('message', msg);
+  }
+</script>
